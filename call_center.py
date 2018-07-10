@@ -4,10 +4,15 @@ Menu of pizza was taken from:
 http://www.johnspizzerianyc.com/Times-Square-Menu/Pizza
 
 """
+
+# HERE IS THE CONTENT THAT WE GONNA USE>>>>
+
 import random
-# import re
+import re
 
 menu_full = '''
+    Here is our full menu!
+
     Traditional:
     Mozzarella cheese and tomato sauce.
     Price - 19$
@@ -41,15 +46,43 @@ stuff = random.choice(all_stuff)
 greetings = ['Hi!', 'Hello!', 'Yo!', 'Sup?', 'Whazzup?', 'Howdy!', 'Hi there!']
 hi = random.choice(greetings)
 
+misunderstanding = [
+    'What do you mean? Does it means yes or no?',
+    'Could you please repeat that?',
+    'Yes or No? You can answer in russian if you want...',
+    'Sorry, I dont understand. Do you mean yes?',
+    'Not so fast cowboy! You push the wrong button ~_~',
+    'C\'mon dude! Do you want some pizza or not?'
+]
+
+
+# CHAT STARTS HERE>>>>
+
 print('''
 {} My name is {}! What do I call you?
 '''.format(hi, stuff))
 usr_name = input()
 
+# print('''
+# Ok {}! Looking for some classic italian pizza?'''.format(usr_name))
+
 print('''
-Ok {}! Looking for some classic italian pizza?
-Check it out:'''.format(usr_name))
+Ok {}! Looking for some classic italian pizza? [Y/n (Д/н)]:
+'''.format(usr_name))
 
-# Need 'Yes_or_No' question here with RE (regular expressions) use.
+while True:
+    response = input().upper()
 
-print(menu_full)
+    if re.match("[YД]", response):
+        print(menu_full)
+        break
+    elif re.match("[NН]", response):
+        print()
+        print("Ok {}. See you later!".format(usr_name))
+        raise SystemExit(1)
+    else:
+        print()
+        print(random.choice(misunderstanding))
+        print()
+
+print("next question")
